@@ -42,6 +42,12 @@ public class Gate {
                 : (sourceEquals(destination) ? destinationEquals(source) : false);
     }
 
+    public void isClosedDoorFor(final Room room) {
+        if (room.isDoorClosed()) {
+            throw new ClosedDoorException("The source room is closed");
+        }
+    }
+
     @Override
     public String toString() {
         return "Gate{" +

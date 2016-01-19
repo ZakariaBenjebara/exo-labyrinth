@@ -16,4 +16,8 @@ public class Door {
             throw new DoorAlreadyClosedException("Door already closed!");
         state = State.CLOSED;
     }
+
+    public boolean isColsed() {
+        return state == State.CLOSED;
+    }
 }

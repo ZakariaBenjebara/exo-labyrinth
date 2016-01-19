@@ -37,4 +37,9 @@ public class Room {
     public void closeDoor() {
         door.close();
     }
+
+    public boolean isDoorClosed() {
+        return door.isColsed();
+    }
+
 }

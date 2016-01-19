@@ -22,7 +22,9 @@ public class Path {
 
     public boolean canReachDestination(final Room destination, List<Gate> gates) {
         for (Gate gate : gates) {
-            if (gate.canReach(pathRooms.get(pathRooms.size() - 1), destination)) {
+            final Room source = pathRooms.get(pathRooms.size() - 1);
+            if (gate.canReach(source, destination)) {
+                gate.isClosedDoorFor(source);
                 return true;
             }
         }
