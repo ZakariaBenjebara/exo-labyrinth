@@ -1,5 +1,7 @@
 package com.nespresso.sofa.recruitment.labyrinth;
 
+import com.nespresso.sofa.recruitment.labyrinth.exception.DoorAlreadyClosedException;
+
 public class RoomState {
 
     private enum State {

@@ -1,6 +1,9 @@
 package com.nespresso.sofa.recruitment.labyrinth;
 
 
+import com.nespresso.sofa.recruitment.labyrinth.exception.ClosedDoorException;
+import com.nespresso.sofa.recruitment.labyrinth.exception.DoorAlreadyClosedException;
+import com.nespresso.sofa.recruitment.labyrinth.exception.IllegalMoveException;
 import org.junit.Ignore;
 import org.junit.Test;
 

@@ -1,5 +1,7 @@
 package com.nespresso.sofa.recruitment.labyrinth;
 
+import com.nespresso.sofa.recruitment.labyrinth.exception.IllegalMoveException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +18,6 @@ public class Labyrinth {
     public Labyrinth(final String... roomsAndGates) {
         rooms = createRooms(roomsAndGates);
         gates = createGates(roomsAndGates);
-        System.out.println(rooms);
-        System.out.println(gates);
     }
 
     private Map<String, Room> createRooms(final String... roomsAndGates) {
@@ -27,13 +27,15 @@ public class Labyrinth {
             final String roomDestinationId = String.valueOf(roomsAndGate.charAt(2));
             final Room roomSource = new Room(roomSourceId);
             final Room roomDestination = new Room(roomDestinationId);
-            if (!rooms.containsKey(roomSourceId))
-                rooms.put(roomSourceId, roomSource);
-
-            if (!rooms.containsKey(roomDestinationId))
-                rooms.put(roomDestinationId, roomDestination);
+            createRoom(rooms, roomSourceId, roomSource);
+            createRoom(rooms, roomDestinationId, roomDestination);
         }
         return rooms;
+    }
+
+    private void createRoom(Map<String, Room> rooms, String roomSourceId, Room roomSource) {
+        if (!rooms.containsKey(roomSourceId))
+            rooms.put(roomSourceId, roomSource);
     }
 
     private List<Gate> createGates(String[] roomsAndGates) {
@@ -47,10 +49,6 @@ public class Labyrinth {
             gates.add(createGate(gateGateType, roomSource, roomDestination));
         }
         return gates;
-    }
-
-    private Gate createGate(final Gate.GateType gateType, Room roomSource, final Room roomDestination) {
-        return new Gate(gateType, roomSource, roomDestination);
     }
 
     public void popIn(final String roomId) {
@@ -75,4 +73,9 @@ public class Labyrinth {
     public String readSensors() {
         return path.readSensors();
     }
+
+    private Gate createGate(final Gate.GateType gateType, Room roomSource, final Room roomDestination) {
+        return new Gate(gateType, roomSource, roomDestination);
+    }
+
 }

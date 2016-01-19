@@ -5,7 +5,7 @@ public class Room {
 
     private final String id;
 
-    private RoomState roomState = new RoomState();
+    private final RoomState roomState = new RoomState();
 
     public Room(String id) {
         this.id = id;
