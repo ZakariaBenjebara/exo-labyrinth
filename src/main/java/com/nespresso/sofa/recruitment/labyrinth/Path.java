@@ -7,6 +7,8 @@ public class Path {
 
     private final List<Room> pathRooms;
 
+    private final StringBuilder walkerFollower = new StringBuilder();
+
     public Path() {
         this.pathRooms = new LinkedList<>();
     }
@@ -24,7 +26,7 @@ public class Path {
         for (Gate gate : gates) {
             final Room source = pathRooms.get(pathRooms.size() - 1);
             if (gate.canReach(source, destination)) {
-                gate.isClosedDoorFor(source);
+                if (gate.)
                 return true;
             }
         }

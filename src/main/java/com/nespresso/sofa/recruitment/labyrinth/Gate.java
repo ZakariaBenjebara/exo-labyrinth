@@ -1,7 +1,5 @@
 package com.nespresso.sofa.recruitment.labyrinth;
 
-import java.math.RoundingMode;
-
 public class Gate {
 
     enum Representation {
@@ -39,13 +37,14 @@ public class Gate {
     public boolean canReach(final Room source, final Room destination) {
         return sourceEquals(source)
                 ? destinationEquals(destination)
-                : (sourceEquals(destination) ? destinationEquals(source) : false);
+                : (sourceEquals(destination) ? (destinationEquals(source) && isClosedDoorFor(source)) : false);
     }
 
-    public void isClosedDoorFor(final Room room) {
+    public boolean isClosedDoorFor(final Room room) {
         if (room.isDoorClosed()) {
             throw new ClosedDoorException("The source room is closed");
         }
+        return true;
     }
 
     @Override

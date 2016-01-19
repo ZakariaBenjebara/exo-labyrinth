@@ -85,6 +85,7 @@ public class LabyrinthShould {
         labyrinth.closeLastDoor();
         labyrinth.walkTo("G");
     }
+
     @Ignore
     @Test(expected = ClosedDoorException.class)
     public void not_Allow_Closed_Door_Crossing() {
@@ -101,7 +102,6 @@ public class LabyrinthShould {
         labyrinth.walkTo("G");
     }
 
-    
     @Test(expected = ClosedDoorException.class)
     public void not_Allow_Turn_Back_Through_Closed_Door() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -112,7 +112,6 @@ public class LabyrinthShould {
         labyrinth.walkTo("B");
     }
 
-    @Ignore
     @Test
     public void follow_Walker() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "B$D", "D$E", "D$F", "F$H", "D$F");
