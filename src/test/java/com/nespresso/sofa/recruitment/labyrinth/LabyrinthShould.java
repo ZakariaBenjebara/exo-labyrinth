@@ -1,6 +1,7 @@
 package com.nespresso.sofa.recruitment.labyrinth;
 
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +31,7 @@ public class LabyrinthShould {
         labyrinth.walkTo("E"); // room E does not exist in the labyrinth
     }
 
+    @Ignore
     @Test(expected = IllegalMoveException.class)
     public void refuse_Move_Without_Path() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "B$D");
@@ -38,6 +40,7 @@ public class LabyrinthShould {
         labyrinth.walkTo("C"); // Can not reach C from B
     }
 
+    @Ignore
     @Test
     public void allow_Cyclic_Path() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -52,7 +55,7 @@ public class LabyrinthShould {
         labyrinth.walkTo("G");
     }
 
-
+    @Ignore
     @Test
     public void allow_Back_And_Forth() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -63,7 +66,7 @@ public class LabyrinthShould {
         labyrinth.walkTo("D");
     }
 
-
+    @Ignore
     @Test
     public void allow_Walker_To_Close_Passed_Door() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -74,7 +77,7 @@ public class LabyrinthShould {
         labyrinth.closeLastDoor();
         labyrinth.walkTo("G");
     }
-
+    @Ignore
     @Test(expected = DoorAlreadyClosedException.class)
     public void allow_Walker_To_Close_Only_Last_Door() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -87,6 +90,7 @@ public class LabyrinthShould {
         labyrinth.walkTo("G");
     }
 
+    @Ignore
     @Test(expected = ClosedDoorException.class)
     public void not_Allow_Closed_Door_Crossing() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -102,6 +106,7 @@ public class LabyrinthShould {
         labyrinth.walkTo("G");
     }
 
+    @Ignore
     @Test(expected = ClosedDoorException.class)
     public void not_Allow_Turn_Back_Through_Closed_Door() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -112,7 +117,7 @@ public class LabyrinthShould {
         labyrinth.walkTo("B");
     }
 
-
+    @Ignore
     @Test
     public void follow_Walker() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "B$D", "D$E", "D$F", "F$H", "D$F");
@@ -125,6 +130,7 @@ public class LabyrinthShould {
         assertThat(labyrinth.readSensors()).isEqualTo("AB;BD;DF");
     }
 
+    @Ignore
     @Test
     public void follow_Walker_Through_Unmonitored_Path() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -137,6 +143,4 @@ public class LabyrinthShould {
         labyrinth.walkTo("G");
         assertThat(labyrinth.readSensors()).isEqualTo("AB;EF");
     }
-
-
 }
