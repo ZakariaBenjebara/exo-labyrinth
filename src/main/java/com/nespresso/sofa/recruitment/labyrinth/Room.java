@@ -5,6 +5,8 @@ public class Room {
 
     private final String id;
 
+    private Door door = new Door();
+
     public Room(String id) {
         this.id = id;
     }
@@ -30,5 +32,9 @@ public class Room {
         return "Room{" +
                 "id='" + id + '\'' +
                 '}';
+    }
+
+    public void closeDoor() {
+        door.close();
     }
 }

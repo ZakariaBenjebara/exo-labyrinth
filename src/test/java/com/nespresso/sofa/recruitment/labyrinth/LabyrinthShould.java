@@ -53,7 +53,6 @@ public class LabyrinthShould {
         labyrinth.walkTo("G");
     }
 
-    @Ignore
     @Test
     public void allow_Back_And_Forth() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -64,7 +63,6 @@ public class LabyrinthShould {
         labyrinth.walkTo("D");
     }
 
-    @Ignore
     @Test
     public void allow_Walker_To_Close_Passed_Door() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");
@@ -75,7 +73,7 @@ public class LabyrinthShould {
         labyrinth.closeLastDoor();
         labyrinth.walkTo("G");
     }
-    @Ignore
+
     @Test(expected = DoorAlreadyClosedException.class)
     public void allow_Walker_To_Close_Only_Last_Door() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");

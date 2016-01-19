@@ -28,4 +28,8 @@ public class Path {
         }
         return false;
     }
+
+    public void closeLastDoor() {
+        pathRooms.get(pathRooms.size() -1 ).closeDoor();
+    }
 }

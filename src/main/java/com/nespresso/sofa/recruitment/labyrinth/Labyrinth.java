@@ -70,6 +70,7 @@ public class Labyrinth {
     }
 
     public void closeLastDoor() {
+        path.closeLastDoor();
     }
 
     public String readSensors() {
