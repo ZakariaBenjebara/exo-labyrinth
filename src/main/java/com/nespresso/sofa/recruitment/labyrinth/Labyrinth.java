@@ -9,46 +9,34 @@ import java.util.Map;
 
 public class Labyrinth {
 
-    private final List<Gate> gates;
+    private final List<Gate> gates = new ArrayList<>();
 
-    private final Map<String, Room> rooms;
+    private final Map<String, Room> rooms = new HashMap<>();
 
     private final Path path = new Path();
 
     public Labyrinth(final String... roomsAndGates) {
-        rooms = createRooms(roomsAndGates);
-        gates = createGates(roomsAndGates);
+        createRoomsAndGates(roomsAndGates);
     }
 
-    private Map<String, Room> createRooms(final String... roomsAndGates) {
-        final Map<String, Room> rooms = new HashMap<>();
+    private void createRoomsAndGates(final String... roomsAndGates) {
         for (final String roomsAndGate : roomsAndGates) {
             final String roomSourceId = String.valueOf(roomsAndGate.charAt(0));
+            final String gateType = String.valueOf(roomsAndGate.charAt(1));
             final String roomDestinationId = String.valueOf(roomsAndGate.charAt(2));
-            final Room roomSource = new Room(roomSourceId);
-            final Room roomDestination = new Room(roomDestinationId);
-            createRoom(rooms, roomSourceId, roomSource);
-            createRoom(rooms, roomDestinationId, roomDestination);
+            final Room source = createRoomIfNotExistOrReturnRef(roomSourceId);
+            final Room destination = createRoomIfNotExistOrReturnRef(roomDestinationId);
+            gates.add(Gate.builder().withGateType(gateType).withSource(source).withDestination(destination).build());
         }
-        return rooms;
     }
 
-    private void createRoom(Map<String, Room> rooms, String roomSourceId, Room roomSource) {
-        if (!rooms.containsKey(roomSourceId))
-            rooms.put(roomSourceId, roomSource);
-    }
-
-    private List<Gate> createGates(String[] roomsAndGates) {
-        final List<Gate> gates = new ArrayList<>();
-        for (final String roomsAndGate : roomsAndGates) {
-            final String roomSourceId = String.valueOf(roomsAndGate.charAt(0));
-            final String roomDestinationId = String.valueOf(roomsAndGate.charAt(2));
-            final Gate.GateType gateGateType = Gate.GateType.representationFromString(String.valueOf(roomsAndGate.charAt(1)));
-            final Room roomSource = rooms.get(roomSourceId);
-            final Room roomDestination = rooms.get(roomDestinationId);
-            gates.add(createGate(gateGateType, roomSource, roomDestination));
+    private Room createRoomIfNotExistOrReturnRef(final String roomId) {
+        if (!rooms.containsKey(roomId)) {
+            final Room room = new Room(roomId);
+            rooms.put(roomId, room);
+            return room;
         }
-        return gates;
+        return rooms.get(roomId);
     }
 
     public void popIn(final String roomId) {
@@ -61,7 +49,7 @@ public class Labyrinth {
 
         final Room destination = rooms.get(roomId);
         if (!path.canReachDestination(destination, gates))
-            throw new IllegalMoveException("Can not reach the destination!");
+            throw new IllegalMoveException("Can not reach the withDestination!");
 
         path.walkTo(rooms.get(roomId));
     }
@@ -73,9 +61,4 @@ public class Labyrinth {
     public String readSensors() {
         return path.readSensors();
     }
-
-    private Gate createGate(final Gate.GateType gateType, Room roomSource, final Room roomDestination) {
-        return new Gate(gateType, roomSource, roomDestination);
-    }
-
 }

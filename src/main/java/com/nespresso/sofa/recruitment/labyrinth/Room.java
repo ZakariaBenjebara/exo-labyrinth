@@ -39,7 +39,7 @@ public class Room {
     }
 
     public boolean isDoorClosed() {
-        return roomState.isColsed();
+        return roomState.isClosed();
     }
 
     public String printRoom() {

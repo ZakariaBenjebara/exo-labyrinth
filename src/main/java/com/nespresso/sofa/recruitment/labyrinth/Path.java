@@ -7,18 +7,18 @@ public class Path {
 
     private final List<Room> pathRooms;
 
-    private final StringBuilder walkerFollower = new StringBuilder();
+    private final StringBuilder walkingFollower = new StringBuilder();
 
     public Path() {
         this.pathRooms = new LinkedList<>();
     }
 
-    public void popIn(Room room) {
+    public void popIn(final Room room) {
         pathRooms.clear();
         pathRooms.add(room);
     }
 
-    public void walkTo(Room room) {
+    public void walkTo(final Room room) {
         pathRooms.add(room);
     }
 
@@ -27,7 +27,7 @@ public class Path {
             final Room source = pathRooms.get(pathRooms.size() - 1);
             if (gate.canReach(source, destination)) {
                 if (gate.isSensorType()) {
-                    appendFollowerPath(destination, source);
+                    appendToWalkingFollower(destination, source);
                 }
                 return true;
             }
@@ -35,10 +35,10 @@ public class Path {
         return false;
     }
 
-    private void appendFollowerPath(Room destination, Room source) {
-        if (!walkerFollower.toString().isEmpty())
-            walkerFollower.append(";");
-        walkerFollower.append(source.printRoom()).append(destination.printRoom());
+    private void appendToWalkingFollower(final Room destination, final Room source) {
+        if (!walkingFollower.toString().isEmpty())
+            walkingFollower.append(";");
+        walkingFollower.append(source.printRoom()).append(destination.printRoom());
     }
 
     public void closeLastDoor() {
@@ -46,6 +46,6 @@ public class Path {
     }
 
     public String readSensors() {
-        return walkerFollower.toString();
+        return walkingFollower.toString();
     }
 }

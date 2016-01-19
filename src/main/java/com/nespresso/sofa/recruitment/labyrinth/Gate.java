@@ -4,28 +4,16 @@ import com.nespresso.sofa.recruitment.labyrinth.exception.ClosedDoorException;
 
 public class Gate {
 
-    enum GateType {
-        DEFAULT, SENSOR;
-
-        public static GateType representationFromString(final String presentation) {
-            if (presentation.equals("$")) {
-                return SENSOR;
-            } else {
-                return DEFAULT;
-            }
-        }
-    }
-
     private final GateType gateType;
 
     private final Room source;
 
     private final Room destination;
 
-    public Gate(GateType gateType, Room source, Room destination) {
-        this.gateType = gateType;
-        this.source = source;
-        this.destination = destination;
+    public Gate(final Builder builder) {
+        this.gateType = GateType.gateTypeFromString(builder.gateType);
+        this.source = builder.source;
+        this.destination = builder.destination;
     }
 
     public boolean sourceEquals(final Room source) {
@@ -44,7 +32,7 @@ public class Gate {
 
     public boolean isClosedDoorFor(final Room room) {
         if (room.isDoorClosed()) {
-            throw new ClosedDoorException("The source room is closed");
+            throw new ClosedDoorException("The withSource room is closed");
         }
         return true;
     }
@@ -53,13 +41,49 @@ public class Gate {
         return gateType == GateType.SENSOR;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+    private enum GateType {
+        DEFAULT, SENSOR;
 
-    @Override
-    public String toString() {
-        return "Gate{" +
-                "gateType=" + gateType +
-                ", source=" + source +
-                ", destination=" + destination +
-                '}';
+        static GateType gateTypeFromString(final String presentation) {
+            if (presentation.equals("$")) {
+                return SENSOR;
+            } else {
+                return DEFAULT;
+            }
+        }
+    }
+
+    public static class Builder {
+
+        private String gateType;
+
+        private Room source;
+
+        private Room destination;
+
+        public Builder() {
+        }
+
+        public Builder withGateType(String gateType) {
+            this.gateType = gateType;
+            return this;
+        }
+
+        public Builder withSource(Room source) {
+            this.source = source;
+            return this;
+        }
+
+        public Builder withDestination(Room destination) {
+            this.destination = destination;
+            return this;
+        }
+
+        public Gate build() {
+            return new Gate(this);
+        }
     }
 }

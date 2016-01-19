@@ -12,11 +12,11 @@ public class RoomState {
 
     public void close() {
         if (state == State.CLOSED)
-            throw new DoorAlreadyClosedException("RoomState already closed!");
+            throw new DoorAlreadyClosedException("The room is already closed!");
         state = State.CLOSED;
     }
 
-    public boolean isColsed() {
+    public boolean isClosed() {
         return state == State.CLOSED;
     }
 }
