@@ -2,10 +2,10 @@ package com.nespresso.sofa.recruitment.labyrinth;
 
 public class Gate {
 
-    enum Representation {
+    enum GateType {
         DEFAULT, SENSOR;
 
-        public static Representation representationFromString(final String presentation) {
+        public static GateType representationFromString(final String presentation) {
             if (presentation.equals("$")) {
                 return SENSOR;
             } else {
@@ -14,14 +14,14 @@ public class Gate {
         }
     }
 
-    private final Representation representation;
+    private final GateType gateType;
 
     private final Room source;
 
     private final Room destination;
 
-    public Gate(Representation representation, Room source, Room destination) {
-        this.representation = representation;
+    public Gate(GateType gateType, Room source, Room destination) {
+        this.gateType = gateType;
         this.source = source;
         this.destination = destination;
     }
@@ -47,10 +47,15 @@ public class Gate {
         return true;
     }
 
+    public boolean isSensorType() {
+        return gateType == GateType.SENSOR;
+    }
+
+
     @Override
     public String toString() {
         return "Gate{" +
-                "representation=" + representation +
+                "gateType=" + gateType +
                 ", source=" + source +
                 ", destination=" + destination +
                 '}';

@@ -41,16 +41,16 @@ public class Labyrinth {
         for (final String roomsAndGate : roomsAndGates) {
             final String roomSourceId = String.valueOf(roomsAndGate.charAt(0));
             final String roomDestinationId = String.valueOf(roomsAndGate.charAt(2));
-            final Gate.Representation gateRepresentation = Gate.Representation.representationFromString(String.valueOf(roomsAndGate.charAt(1)));
+            final Gate.GateType gateGateType = Gate.GateType.representationFromString(String.valueOf(roomsAndGate.charAt(1)));
             final Room roomSource = rooms.get(roomSourceId);
             final Room roomDestination = rooms.get(roomDestinationId);
-            gates.add(createGate(gateRepresentation, roomSource, roomDestination));
+            gates.add(createGate(gateGateType, roomSource, roomDestination));
         }
         return gates;
     }
 
-    private Gate createGate(final Gate.Representation representation, Room roomSource, final Room roomDestination) {
-        return new Gate(representation, roomSource, roomDestination);
+    private Gate createGate(final Gate.GateType gateType, Room roomSource, final Room roomDestination) {
+        return new Gate(gateType, roomSource, roomDestination);
     }
 
     public void popIn(final String roomId) {
@@ -65,8 +65,7 @@ public class Labyrinth {
         if (!path.canReachDestination(destination, gates))
             throw new IllegalMoveException("Can not reach the destination!");
 
-        path.popIn(rooms.get(roomId));
-
+        path.walkTo(rooms.get(roomId));
     }
 
     public void closeLastDoor() {
@@ -74,7 +73,6 @@ public class Labyrinth {
     }
 
     public String readSensors() {
-
-        return null;
+        return path.readSensors();
     }
 }

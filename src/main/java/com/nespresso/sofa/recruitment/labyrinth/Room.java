@@ -42,4 +42,7 @@ public class Room {
         return door.isColsed();
     }
 
+    public String printRoom() {
+        return id;
+    }
 }
