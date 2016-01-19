@@ -124,7 +124,6 @@ public class LabyrinthShould {
         assertThat(labyrinth.readSensors()).isEqualTo("AB;BD;DF");
     }
 
-    @Ignore
     @Test
     public void follow_Walker_Through_Unmonitored_Path() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");

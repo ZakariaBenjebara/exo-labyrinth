@@ -5,7 +5,7 @@ public class Room {
 
     private final String id;
 
-    private Door door = new Door();
+    private RoomState roomState = new RoomState();
 
     public Room(String id) {
         this.id = id;
@@ -35,11 +35,11 @@ public class Room {
     }
 
     public void closeDoor() {
-        door.close();
+        roomState.close();
     }
 
     public boolean isDoorClosed() {
-        return door.isColsed();
+        return roomState.isColsed();
     }
 
     public String printRoom() {

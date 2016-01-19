@@ -1,6 +1,6 @@
 package com.nespresso.sofa.recruitment.labyrinth;
 
-public class Door {
+public class RoomState {
 
     private enum State {
         CLOSED, OPENED
@@ -10,7 +10,7 @@ public class Door {
 
     public void close() {
         if (state == State.CLOSED)
-            throw new DoorAlreadyClosedException("Door already closed!");
+            throw new DoorAlreadyClosedException("RoomState already closed!");
         state = State.CLOSED;
     }
 
