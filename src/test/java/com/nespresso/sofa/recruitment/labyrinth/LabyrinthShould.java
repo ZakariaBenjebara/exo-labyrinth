@@ -31,7 +31,6 @@ public class LabyrinthShould {
         labyrinth.walkTo("E"); // room E does not exist in the labyrinth
     }
 
-    @Ignore
     @Test(expected = IllegalMoveException.class)
     public void refuse_Move_Without_Path() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "B$D");
@@ -40,7 +39,6 @@ public class LabyrinthShould {
         labyrinth.walkTo("C"); // Can not reach C from B
     }
 
-    @Ignore
     @Test
     public void allow_Cyclic_Path() {
         Labyrinth labyrinth = new Labyrinth("A$B", "A$C", "C|E", "B$D", "B|E", "E$F", "D$F", "F|G");

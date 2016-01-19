@@ -1,5 +1,7 @@
 package com.nespresso.sofa.recruitment.labyrinth;
 
+import java.math.RoundingMode;
+
 public class Gate {
 
     enum Representation {
@@ -32,6 +34,12 @@ public class Gate {
 
     public boolean destinationEquals(final Room destination) {
         return this.destination.equals(destination);
+    }
+
+    public boolean canReach(final Room source, final Room destination) {
+        return sourceEquals(source)
+                ? destinationEquals(destination)
+                : (sourceEquals(destination) ? destinationEquals(source) : false);
     }
 
     @Override

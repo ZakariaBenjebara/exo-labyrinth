@@ -20,7 +20,7 @@ public class Labyrinth {
         System.out.println(gates);
     }
 
-    private Map<String,Room> createRooms(final String... roomsAndGates) {
+    private Map<String, Room> createRooms(final String... roomsAndGates) {
         final Map<String, Room> rooms = new HashMap<>();
         for (final String roomsAndGate : roomsAndGates) {
             final String roomSourceId = String.valueOf(roomsAndGate.charAt(0));
@@ -62,12 +62,11 @@ public class Labyrinth {
             throw new IllegalMoveException("Room not found!");
 
         final Room destination = rooms.get(roomId);
-        if (destination != null) {
-            if (!path.canReachDestination(destination, gates))
-                throw new IllegalMoveException("Can not reach the destination!");
+        if (!path.canReachDestination(destination, gates))
+            throw new IllegalMoveException("Can not reach the destination!");
 
-            path.popIn(rooms.get(roomId));
-        }
+        path.popIn(rooms.get(roomId));
+
     }
 
     public void closeLastDoor() {

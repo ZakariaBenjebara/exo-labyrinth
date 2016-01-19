@@ -22,9 +22,8 @@ public class Path {
 
     public boolean canReachDestination(final Room destination, List<Gate> gates) {
         for (Gate gate : gates) {
-            if (gate.sourceEquals(pathRooms.get(pathRooms.size() - 1))) {
-                if (gate.destinationEquals(destination))
-                    return true;
+            if (gate.canReach(pathRooms.get(pathRooms.size() - 1), destination)) {
+                return true;
             }
         }
         return false;
